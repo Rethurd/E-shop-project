@@ -1,0 +1,85 @@
+body {
+  background: white;
+  font-family: 'Raleway', sans-serif; }
+
+.hot-deals .img-sibling {
+  background: #6c757d;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.5s ease;
+  padding: 5% 3px; }
+
+.hot-deals .card {
+  margin-top: 20px; }
+
+.hot-deals .section-title {
+  margin-bottom: 30px;
+  text-align: center; }
+
+.hot-deals .card-img-top:hover ~ .img-sibling {
+  opacity: 1; }
+
+.hot-deals .img-sibling:hover {
+  opacity: 1; }
+
+.login-form {
+  width: 500px; }
+
+.search-results {
+  background: #e9ecef; }
+
+.help-bar {
+  background: #e9ecef; }
+
+.order-by {
+  vertical-align: middle; }
+
+.search-box #input-search {
+  float: left;
+  padding: 6px;
+  border: none;
+  font-size: 17px; }
+
+.search-box button {
+  width: 40px;
+  float: right;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer; }
+
+.categories-list .category:hover {
+  color: #007bff;
+  cursor: pointer;
+  background: #f8f9fa; }
+
+.product .product-info .product-image {
+  width: 130px;
+  height: 130px; }
+
+.product .product-info .product-description {
+  font-size: 80%; }
+
+.product .toggle-info {
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out; }
+
+.add-product label {
+  margin-top: auto;
+  margin-bottom: auto; }
+
+.add-product .second-row input {
+  width: 200px; }
+
+.swal-footer {
+  background-color: #f5f8fa;
+  margin-top: 32px;
+  border-top: 1px solid #E9EEF1;
+  overflow: hidden; }
