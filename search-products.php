@@ -29,7 +29,7 @@ $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
                 
               }
                 echo 
-                ' <div class="product card" id="'.strtolower($row['type']).'-'.$row['id'].'"> 
+                ' <div class="product card  " id="'.strtolower($row['type']).'-'.$row['id'].'"> 
                     <div class="h5 product-name text-center my-1">'.$row['nm'].'</div>
                     <div class="product-info row mt-1 container">
                       <div class="col-lg-3 col-sm-4">
@@ -44,16 +44,22 @@ $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
                         <div class="mt-2">'.$row['price'].'</div>  
                         <div class="mt-3"><button id="btn-'.strtolower($row['type']).'-'.$row['id'].'" class="btn btn-warning"><i class="fas fa-shopping-cart mr-2"></i>Add to cart </button></div>
                       </div>
-                      <div class="toggle-info ml-3 my-3" id="more-info-'.$row['id'].'" style="visibility:hidden;max-height:0px">
+                    </div>
+                      <div class="row container">
+                        <div id="show-more-'.$row['id'].'" class="show-info ml-auto col-offset-9 col-3 text-center"  ><a href="#"><i class="fas fa-angle-down mr-2"></i> Show more</a> </div>
+                      </div>
+                      <div class="toggle-info ml-3" id="more-info-'.$row['id'].'" style="visibility:hidden;max-height:0px">
                         <div ><b>Manufacturer: </b>'.$row['manu'].'</div>
                         <div ><b>Warranty:</b> '.$row['warr'].'</div>
                         <div ><b>Type:</b> '.$row['type'].'</div>
                         <div "><b>Model:</b> '.$row['model'].'</div>
                         <div "><b>Additional information:</b></div>
                         <div>'.$row['info'].'</div>
-                      </div>
-                      </div>
-                    </div>';
+                   </div>
+                   <div class="row container">
+                   <div id="show-less-'.$row['id'].'" class="hide-info ml-auto  col-offset-9 col-3 text-center mb-1" style="visibility:hidden;max-height:0px;"  ><a href="#"><i class="fas fa-angle-up mr-2"></i> Show less</a> </div>
+                 </div>
+                  </div>';
               }
 
 
