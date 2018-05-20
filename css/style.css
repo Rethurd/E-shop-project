@@ -83,3 +83,13 @@ body {
   margin-top: 32px;
   border-top: 1px solid #E9EEF1;
   overflow: hidden; }
+
+.footer {
+  color: white;
+  font-size: 80%; }
+  .footer a {
+    font-weight: 500;
+    color: white; }
+
+.remove-from-cart {
+  cursor: pointer; }

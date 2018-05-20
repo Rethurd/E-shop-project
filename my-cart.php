@@ -1,6 +1,8 @@
 <?php
-require 'vendor/autoload.php';
+require 'connection.php';
 require 'admin-check.php';
+
+print_r($_SESSION['cart']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +20,83 @@ require 'admin-check.php';
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
+
+<script>
+$(document).ready(function()
+{
+    $(document).on('change','.item-count',function()
+    {
+        if($(this).val()>20)
+        {
+            $(this).val(20);
+           
+        }
+        console.log($(this));
+        //get current sum of prices
+        var currentSum = $("#current-total-price")[0]['innerHTML'];
+        //get the id and price of changed item
+        var idOfPricePerOne = $(this)[0]['id'].replace('count-','price-');
+        var pricePerOne = $("#"+idOfPricePerOne+"")[0]['innerHTML'];
+        // this approach doesnt work because if I dont know what was the previous value of count, i dont know how much to substract from the previous sum
+        // gotta recalculate every time?
+        // Make a loop to go through each row excluding the row of the changed one and calculate over
+        var clickedRowId = $(this).parent().parent()[0]['id'];
+        var table = $(this).parent().parent().parent()[0]['childNodes'];
+        var newSum =0;
+        var newCount=0;
+        for (var i=0;i<table.length-1;i++)
+        {
+            if(table[i]['id']!=clickedRowId)
+            {
+                //change price:
+                var countId = table[i]['childNodes'][5]['childNodes'][0]['id'];
+                var count = $("#"+countId+"").val();
+                var price = parseInt(table[i]['childNodes'][7]['innerHTML']);
+                newSum+=price*count;
+                newCount+=parseInt(count);
+                console.log(newCount);
+                //change count:
+
+            }
+        }
+        // to the calculated, add the changed:
+        newSum+=pricePerOne*$(this).val();
+        newCount+=parseInt($(this).val());
+        
+        // change the sum to the new one
+        $("#current-total-price")[0]['innerHTML']=newSum;
+        $("#current-total-count-short")[0]['innerHTML']=newCount;
+        $("#current-total-count-full")[0]['innerHTML']=newCount+" item(s)";
+
+        
+        
+    })
+
+    $(document).on('click','.remove-from-cart',function()
+    {
+        
+        rowId = $(this).parent().parent()[0]['id'];
+        var row = document.getElementById(rowId);
+        row.parentNode.removeChild(row);
+        justId=rowId.replace("row-","");
+
+        //ajax call to remove it from session cart variable
+        $.ajax({
+            url: "remove-from-cart.php",
+            method: "POST",
+            data:{
+                IdToRemove:justId
+            },
+            dataType:"html"
+                }).done(function(msg) {
+        console.log( msg );
+        });
+    
+    })
+    
+})
+
+</script>
 <body>
 
 <div class="container">
@@ -89,12 +168,59 @@ require 'admin-check.php';
     <?php
     if(isset($_SESSION['cart']))
     {
-        print_r($_SESSION['cart']);
+        $sql = "SELECT id id, name name, price price FROM `all_products` ";
+        for($i=0;$i<sizeof($_SESSION['cart']);$i++)
+        {
+            $current=$_SESSION['cart'][$i];
+            if($i==0)
+            {
+                $sql.=" WHERE ID='${current}'";
+            }
+            else{
+                $sql.=" OR ID='${current}'";
+            }
+        }
+        $query=$conn->prepare($sql);
+        $query->execute();
+        $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo('<table class="cart-table table table-striped">');
+        echo '<thead class="thead-dark"> 
+                <tr>
+                    <th>#</th>
+                    <th>Item</th>
+                    <th>Count</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+             </thead>';
+             $sum=0;
+             $count=0;
+        for($i=0;$i<sizeof($_SESSION['cart']);$i++)
+        {
+            echo '<tr id="row-'.$allRows[$i]['id'].'">
+                    <td>'.($i+1).'</td>
+                    <td>'.$allRows[$i]['name'].'</td>
+                    <td><input class="item-count form-control" style="width:100px;" max="20" type="number" id="count-'.$allRows[$i]['id'].'" name="item-'.$allRows[$i]['id'].'" value="1" /></td>
+                    <td id="price-'.$allRows[$i]['id'].'">'.$allRows[$i]['price'].'</td>
+                    <td style="width:130px;vertical-align:middle" class="text-center" ><i style="color:#dc3545" id="remove-'.$allRows[$i]['id'].'" class="fas fa-times remove-from-cart"></i></td>
+                </tr>';
+                $sum+=$allRows[$i]['price'];
+                $count=$i+1;
+                
+        }
+        echo '<tr style="font-weight:bold;"> 
+                <td></td>
+                <td id="current-total-count-full">'.$count.' item(s)</td>
+                <td id="current-total-count-short">'.$count.'</td>
+                <td id="current-total-price">'.$sum.'</td>
+                <td><button style="font-size:90%;" id="order-btn" class="btn btn-warning"><i class="fas fa-truck-moving mr-2"></i> Order!</button></td>
+            </tr>';
+        echo('</table>');
     }
     else{
         echo(456);
     }
-
+// once ordered, add 1 to popularity of each item
     ?>  
 </div>
 <div class="footer">
