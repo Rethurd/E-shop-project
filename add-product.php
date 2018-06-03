@@ -31,14 +31,22 @@ if(isset($_POST['name']) && $_POST['name']!='')
     //validation complete, add new record
     if($error==0)
     {
+        
         $image=addslashes($_FILES['image']['tmp_name']);
-        $image=file_get_contents($image);
-        $image=base64_encode($image);
+        if($image!=NULL){
+            $image=file_get_contents($image);
+            $image=base64_encode($image);
+        }
+        
         
         // $sql="INSERT INTO `all_products` (`ID`, `name`, `description`, `image`, `price`, 
         // `manufacturer`, `warranty`, `type`, `model`, `additional_info`, `ratings`, `popularity`) VALUES
         // (NULL, ${_POST['name']}, ' work or also for gaming.', NULL,'${_POST['price']}',
         //  '${_POST['manufacturer]}', '${_POST['warranty']}', 'laptop', 'A515-51G-509A', NULL, '0', '0');";
+        if ($_POST['type']=='Graphics')
+        {
+            $_POST['type']='Graphics card';
+        }
          $sql="INSERT INTO `all_products` (`ID`, `name`, `description`, `image`, `price`, `manufacturer`, `warranty`,
           `type`, `model`, `additional_info`, `ratings`, `popularity`)
           VALUES (NULL, '${_POST['name']}', '${_POST['description']}', '${image}', '${_POST['price']}', '${_POST['manufacturer']}', '${_POST['warranty']}',

@@ -105,6 +105,7 @@ session_start();
               <div class="category" id="cat-laptop"><i class="fas fa-angle-right pl-3 pr-3 "></i>Laptops</div>
               <div class="category" id="cat-keyboard"><i class="fas fa-angle-right pl-3 pr-3 "></i>Keyboards</div>
               <div class="category" id="cat-headphones"><i class="fas fa-angle-right pl-3 pr-3 "></i>Headphones</div>
+              <div class="category" id="cat-graphics-cards"><i class="fas fa-angle-right pl-3 pr-3 "></i>Graphics Cards</div>
             </div>
     </div>
     <div class="col-lg-10 col-sm-12 ">

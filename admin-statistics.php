@@ -207,7 +207,8 @@ echo('</div>');
 				]
 			}]
 
-		};
+        };
+        
 
 function getPopularityByCategoryChart()
 {
@@ -375,6 +376,8 @@ $(document).on("click",".btn-chart-2",function()
     }
     
     var ctx = document.getElementById('myChart2').getContext('2d');
+    
+       
 			window.myBar = new Chart(ctx, {
 				type: 'bar',
 				data: barChartData,
@@ -382,10 +385,17 @@ $(document).on("click",".btn-chart-2",function()
 					responsive: true,
 					legend: {
 						position: 'top',
-					},
+                    },
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true }
+                         }]
+                    }
 					
 				}
-			});
+            });
+            
 })
 
 </script>

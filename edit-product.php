@@ -14,7 +14,10 @@ $warranty=$_GET['warranty'];
 $type=$_GET['type'];
 $model=$_GET['model'];
 $info=$_GET['info'];
-
+if($type=='Graphics')
+{
+    $type='Graphics card';
+}
 
     $sql = "UPDATE `all_products` SET `name` = '${name}', `description` = '${descr}', `price` = '${price}',
      `manufacturer` = '${manufacturer}', `warranty` = '${warranty}', `type` = '${type}', `model` = '${model}', `additional_info` = '${info}' WHERE `all_products`.`id` = '${id}';";

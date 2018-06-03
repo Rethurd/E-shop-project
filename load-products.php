@@ -1,7 +1,12 @@
 <?php
 require 'connection.php';
 $table = $_POST['table'];
+$temp = $table;
 $order = $_POST['order'];
+if($table=='graphics-cards')
+{
+  $table = "Graphics card";
+}
 if(strtolower($order)=='price')
 {
   $sql = "SELECT id id, name nm, description descr, image img, price price, manufacturer manu, warranty warr,type type, model model, additional_info info FROM `all_products` WHERE type='${table}' ORDER BY ${order} ASC";
@@ -11,6 +16,7 @@ else{
   $sql = "SELECT id id, name nm, description descr, image img, price price, manufacturer manu, warranty warr,type type, model model, additional_info info FROM `all_products` WHERE type='${table}' ORDER BY ${order} DESC";
 
 }
+$table = $temp;
 $query=$conn->prepare($sql);
 $query->execute();
 $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
