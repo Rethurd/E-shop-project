@@ -29,7 +29,7 @@ session_start();
 
 <body>
 
-<div class="container">
+<div class="container full-page">
     <!-- navbar-expand-lg means it will show the items when its lg and collapse when < -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="index.php"><i class="fas fa-shopping-bag mr-2"></i>WeShop</a>
@@ -104,6 +104,7 @@ session_start();
                 <!-- get id and replace 'cat-' with '' -->
               <div class="category" id="cat-laptop"><i class="fas fa-angle-right pl-3 pr-3 "></i>Laptops</div>
               <div class="category" id="cat-keyboard"><i class="fas fa-angle-right pl-3 pr-3 "></i>Keyboards</div>
+              <div class="category" id="cat-headphones"><i class="fas fa-angle-right pl-3 pr-3 "></i>Headphones</div>
             </div>
     </div>
     <div class="col-lg-10 col-sm-12 ">
@@ -141,6 +142,9 @@ session_start();
 <div class="footer">
     <!-- TO DO -->
 </div>
+<?php
+include "footer.php";
+?>
 </div>
 
 

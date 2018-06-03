@@ -42,7 +42,7 @@ $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                       </div>
                       <div class="row container">
-                        <div id="show-more-'.$row['id'].'" class="show-info ml-auto col-offset-9 col-3 text-center"  ><a href="#"><i class="fas fa-angle-down mr-2"></i> Show more</a> </div>
+                        <div id="show-more-'.$row['id'].'" class="show-info ml-auto col-sm-12 col-md-offset-9 col-md-3 text-center"  ><a href="#"><i class="fas fa-angle-down mr-2"></i> Show more</a> </div>
                       </div>
                       <div class="toggle-info ml-3 " id="more-info-'.$row['id'].'" style="visibility:hidden;max-height:0px">
                         <div ><b>Manufacturer: </b>'.$row['manu'].'</div>
@@ -53,7 +53,7 @@ $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
                         <div>'.$row['info'].'</div>
                       </div>
                       <div class="row container">
-                        <div id="show-less-'.$row['id'].'" class="hide-info ml-auto  col-offset-9 col-3 text-center mb-1" style="visibility:hidden;max-height:0px;"  ><a href="#"><i class="fas fa-angle-up mr-2"></i> Show less</a> </div>
+                        <div id="show-less-'.$row['id'].'" class="hide-info ml-auto  col-sm-12 col-md-offset-9 col-md-3 text-center mb-1" style="visibility:hidden;max-height:0px;"  ><a href="#"><i class="fas fa-angle-up mr-2"></i> Show less</a> </div>
                       </div>
                     </div>';
               }

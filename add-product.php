@@ -43,7 +43,6 @@ if(isset($_POST['name']) && $_POST['name']!='')
           `type`, `model`, `additional_info`, `ratings`, `popularity`)
           VALUES (NULL, '${_POST['name']}', '${_POST['description']}', '${image}', '${_POST['price']}', '${_POST['manufacturer']}', '${_POST['warranty']}',
            '${_POST['type']}', '${_POST['model']}', '${_POST['additional-information']}','0','0');";
-           echo($sql);
            $query=$conn->prepare($sql);
            $query->execute();
     }

@@ -2,7 +2,6 @@
 require 'connection.php';
 require 'admin-check.php';
 
-print_r($_SESSION['cart']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,8 +74,23 @@ $(document).ready(function()
     $(document).on('click','.remove-from-cart',function()
     {
         
+
         rowId = $(this).parent().parent()[0]['id'];
         var row = document.getElementById(rowId);
+        // remove from sum
+        // get count and price of the item to delete
+        var cId =row['childNodes'][5]['childNodes'][0]['id'];
+        var countItems = parseInt($("#"+cId+"").val());
+        var priceOfItem = parseInt(row['childNodes'][7]['innerHTML']);
+        var oldSum = parseInt($("#current-total-price")[0]['innerHTML']);
+        var oldCount = parseInt($("#current-total-count-short")[0]['innerHTML']);
+        var sumAfterSubstraction=oldSum-countItems*priceOfItem;
+        var countAfterSubstraction=oldCount-countItems;
+
+        $("#current-total-price")[0]['innerHTML']=sumAfterSubstraction;
+        $("#current-total-count-short")[0]['innerHTML']=countAfterSubstraction;
+        $("#current-total-count-full")[0]['innerHTML']=countAfterSubstraction+" item(s)";
+        //remove from table
         row.parentNode.removeChild(row);
         justId=rowId.replace("row-","");
 
@@ -91,6 +105,7 @@ $(document).ready(function()
                 }).done(function(msg) {
         console.log( msg );
         });
+        
     
     })
     
@@ -99,7 +114,7 @@ $(document).ready(function()
 </script>
 <body>
 
-<div class="container">
+<div class="container full-page">
     <!-- navbar-expand-lg means it will show the items when its lg and collapse when < -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="index.php"><i class="fas fa-shopping-bag mr-2"></i>WeShop</a>
@@ -166,7 +181,7 @@ $(document).ready(function()
 <div class="cart-container">
     <div class="heading h3 text-center mt-3 mb-5 ">Shopping cart:</div>
     <?php
-    if(isset($_SESSION['cart']))
+    if(isset($_SESSION['cart']) && count($_SESSION['cart'])>0)
     {
         $sql = "SELECT id id, name name, price price FROM `all_products` ";
         for($i=0;$i<sizeof($_SESSION['cart']);$i++)
@@ -218,7 +233,9 @@ $(document).ready(function()
         echo('</table>');
     }
     else{
-        echo(456);
+        echo("<div class='h4 text-center' >Your cart is empty! </div>");
+        echo("<div class='text-center' ><i style='color:#dc3545;font-size:300%;' class='fas fa-ban'></i> </div>");
+        echo("<div class='h6 mt-3 text-center' ><a href='products.php'>Go back to browsing products!</a> </div>");
     }
 // once ordered, add 1 to popularity of each item
     ?>  
@@ -226,6 +243,9 @@ $(document).ready(function()
 <div class="footer">
     <!-- TO DO -->
 </div>
+<?php
+include "footer.php";
+?>
 </div>
 
 

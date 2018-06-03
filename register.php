@@ -129,7 +129,7 @@ $(document).ready(function () {
 </script>
 <!-- <script src="js/login.js"></script> -->
 <body>
-<div class="container">
+<div class="container full-page">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="index.php"><i class="fas fa-shopping-bag mr-2"></i>WeShop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -263,6 +263,10 @@ $(document).ready(function () {
     </form>
     <div class="text-center mt-5"><a href="login.php">Already have an account? Sign in here!</a></div>
 </div>
+
+<?php
+    include 'footer.php';
+    ?>
 </div>
 
 

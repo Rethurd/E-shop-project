@@ -21,7 +21,7 @@ require 'admin-check.php';
 <script src="js/index.js"></script>
 <body>
 
-<div class="container">
+<div class="container full-page">
     <!-- navbar-expand-lg means it will show the items when its lg and collapse when < -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="index.php"><i class="fas fa-shopping-bag mr-2"></i>WeShop</a>
@@ -94,7 +94,7 @@ require 'admin-check.php';
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </p>
 </div>
-<div class="hot-deals">
+<div class="hot-deals mb-5">
     <div class="section-title"><h4 class="display-4">Hot Deals</h4></div>
 <div class="row">
     <div class="col-sm-12 col-md-4">
@@ -140,30 +140,11 @@ require 'admin-check.php';
 </div>
 </div>
 
-<div class="reviews">
-<!-- TO DO -->
+<?php
+    include 'footer.php';
+    ?>
 </div>
-<div class=" mt-5 footer container bg-primary mx-auto row py-2">
-    <div class="col-4 text-center">
-        <div class="company">
-            <div style="font-weight:600;font-size:120%;">WeShop</div>
-            <div class="mt-2 text-left">WeShop is an on-line electronics shop, focusing mostly on computer hardware and accessories.</div>
-        </div>
-    </div>
-    <div class="col-4 text-center my-auto ">
-        <div class="contact">Contact: k.grzegorek1@gmail.com</div>
-        <div>© 2018 Kamil Grzegorek</div>
-    </div>
-    <div class="col-4 text-center ">
-        <div style="font-weight:600;font-size:120%;">Helpful links:</div>
-        <div><a href="index.php">Index</a></div>
-        <div><a href="products.php">Products</a></div>
-        <div><a href="contact-us.php">Contact Us</a></div>
-    </div>
     
-</div>
-</div>
-
 
 </body>
 

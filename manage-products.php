@@ -221,13 +221,13 @@ function capitalizeFirstLetter(string) {
 </nav>
 
 <div class="manage-products container-fluid">
-    <div class="heading h3 text-center mt-3 mb-5 container-fluid ">Manage products:</div>
+    <div class="heading h3 text-center mt-3 mb-5 container-fluid " style="overflow-x:auto">Manage products:</div>
     <?php
         $sql="SELECT id id, name name, description descr, image img, price price, manufacturer manu, warranty warr, type type, model model, additional_info info FROM `all_products` ";
         $query = $conn->prepare($sql);
         $query->execute();
         $allRows = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo('<table class="table table-hover"><thead><tr><th>Label</th><th>Description</th><th>Price</th><th>Manufacturer</th><th>Warranty</th>
+        echo('<table class="table table-hover table-striped " style="overflow-x:auto"><thead><tr><th>Label</th><th>Description</th><th>Price</th><th>Manufacturer</th><th>Warranty</th>
         <th>Type</th><th>Model</th><th>Additional information</th>
         <th colspan="2">Functions</th></tr></thead><tbody>
            ');
